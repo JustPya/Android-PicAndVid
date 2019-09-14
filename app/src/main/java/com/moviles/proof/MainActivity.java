@@ -1,23 +1,21 @@
 
 package com.moviles.proof;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.text.Layout;
 import android.view.View;
-import android.widget.Button;
+import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -60,6 +58,18 @@ public class MainActivity extends AppCompatActivity {
         videoGridViewId = (GridView) findViewById(R.id.videoGridView);
         videoAdapter = new GridAdapter(this, null, videos);
         videoGridViewId.setAdapter(videoAdapter);
+
+        imageGridViewId.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(MainActivity.this, PictureActivity.class);
+                Bitmap b = (Bitmap) imageAdapter.getItem(position);
+                ByteArrayOutputStream bs = new ByteArrayOutputStream();
+                b.compress(Bitmap.CompressFormat.PNG, 50, bs);
+                intent.putExtra("byteArray", bs.toByteArray());
+                startActivity(intent);
+            }
+        });
     }
 
 
