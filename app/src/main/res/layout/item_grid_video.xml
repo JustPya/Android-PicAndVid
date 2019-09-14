@@ -7,8 +7,8 @@
 
     <VideoView
         android:id="@+id/videoItem"
-        android:layout_width="90sp"
-        android:layout_height="180sp"/>
+        android:layout_width="120sp"
+        android:layout_height="240sp"/>
 
 
 </LinearLayout>

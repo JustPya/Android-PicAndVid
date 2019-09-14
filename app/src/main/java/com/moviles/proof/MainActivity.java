@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -59,6 +60,17 @@ public class MainActivity extends AppCompatActivity {
         videoAdapter = new GridAdapter(this, null, videos);
         videoGridViewId.setAdapter(videoAdapter);
 
+
+
+        videoGridViewId.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                VideoView u = (VideoView) videoAdapter.getItem(position);
+                u.start();
+            }
+        });
+
         imageGridViewId.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -70,6 +82,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
     }
 
 
