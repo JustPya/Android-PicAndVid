@@ -27,7 +27,7 @@ public class GridAdapter extends BaseAdapter {
             this.imageList = imageList;
             this.isPictureGrid = true;
         } else {
-            this.imageList = imageList;
+            this.videoList = videoList;
             this.isPictureGrid = false;
         }
     }
@@ -52,7 +52,7 @@ public class GridAdapter extends BaseAdapter {
 
         if (view == null) {
             LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
-            view = isPictureGrid ? layoutInflater.inflate(R.layout.item_grid_image, null) : layoutInflater.inflate(R.layout.item_grid_image, null);
+            view = isPictureGrid ? layoutInflater.inflate(R.layout.item_grid_image, null) : layoutInflater.inflate(R.layout.item_grid_video, null);
         }
 
         if (isPictureGrid) {
@@ -61,6 +61,7 @@ public class GridAdapter extends BaseAdapter {
         } else {
             VideoView videoItem = (VideoView) view.findViewById(R.id.videoItem);
             videoItem.setVideoURI(videoList.get(i));
+            videoItem.start();
         }
 
 

@@ -27,21 +27,15 @@ public class MainActivity extends AppCompatActivity {
     static final int REQUEST_VIDEO_CAPTURE = 2;
 
     /**
-     * Buttons
-     */
-    private ImageButton cameraId;
-    private ImageButton videoId;
-    private ImageButton galleryId;
-
-    /**
-     * Layouts
+     * TextView
      */
     private TextView lcameraId;
     private TextView lvideoId;
-    private TextView lgalleryId;
 
     private GridView imageGridViewId;
     private GridAdapter imageAdapter;
+
+    private GridView videoGridViewId;
     private GridAdapter videoAdapter;
 
     private ArrayList<Bitmap> images;
@@ -58,51 +52,33 @@ public class MainActivity extends AppCompatActivity {
 
         lcameraId = (TextView) findViewById(R.id.lcameraId);
         lvideoId = (TextView) findViewById(R.id.lvideoId);
-        lgalleryId = (TextView) findViewById(R.id.lgalleryId);
 
         imageGridViewId = (GridView) findViewById(R.id.captureGridView);
-        imageAdapter = new GridAdapter(this,images,null);
+        imageAdapter = new GridAdapter(this, images, null);
         imageGridViewId.setAdapter(imageAdapter);
-        videoAdapter = new GridAdapter(this,null,videos);
 
-
-    }
-
-    public void galleryButton(View view) {
-        lgalleryId.setTextColor(Color.parseColor("#2E51F0"));
-        lcameraId.setTextColor(Color.parseColor("#B8B9BD"));
-        lvideoId.setTextColor(Color.parseColor("#B8B9BD"));
-    }
-
-    public void cameraButton(View view) {
-        lcameraId.setTextColor(Color.parseColor("#2E51F0"));
-        lvideoId.setTextColor(Color.parseColor("#B8B9BD"));
-        lgalleryId.setTextColor(Color.parseColor("#B8B9BD"));
-    }
-
-    public void videoButton(View view) {
-        lvideoId.setTextColor(Color.parseColor("#2E51F0"));
-        lgalleryId.setTextColor(Color.parseColor("#B8B9BD"));
-        lcameraId.setTextColor(Color.parseColor("#B8B9BD"));
+        videoGridViewId = (GridView) findViewById(R.id.videoGridView);
+        videoAdapter = new GridAdapter(this, null, videos);
+        videoGridViewId.setAdapter(videoAdapter);
     }
 
 
     public void takePic(View view) {
-        Toast.makeText(this, "Tomar Foto", Toast.LENGTH_SHORT).show();
+        lcameraId.setTextColor(Color.parseColor("#2E51F0"));
+        lvideoId.setTextColor(Color.parseColor("#B8B9BD"));
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
     }
 
     public void takeVid(View view) {
-        Toast.makeText(this, "Tomar Video", Toast.LENGTH_SHORT).show();
+        lvideoId.setTextColor(Color.parseColor("#2E51F0"));
+        lcameraId.setTextColor(Color.parseColor("#B8B9BD"));
         Intent takeVideoIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
         startActivityForResult(takeVideoIntent, REQUEST_VIDEO_CAPTURE);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-        Toast.makeText(this, "Tome su foto :v", Toast.LENGTH_SHORT).show();
 
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
